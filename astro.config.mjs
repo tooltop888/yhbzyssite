@@ -3,6 +3,13 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
+import cloudflare from '@astrojs/cloudflare';
+
+export default defineConfig({
+  output: 'server', // 从 "static" 改为 "server"
+  adapter: cloudflare(),
+});
+
 import { moteur, MOTEUR_ACTIF } from "./moteur.config.mjs";
 import { existsSync, readdirSync, readFileSync, renameSync, rmdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
