@@ -4,12 +4,10 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import cloudflare from '@astrojs/cloudflare';
-
 export default defineConfig({
   output: 'server', // 从 "static" 改为 "server"
   adapter: cloudflare(),
 });
-
 import { moteur, MOTEUR_ACTIF } from "./moteur.config.mjs";
 import { existsSync, readdirSync, readFileSync, renameSync, rmdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -87,8 +85,8 @@ export default defineConfig({
   // sous /fr/. prefixDefaultLocale: false est ce qui evite un /en/ inutile dans
   // les URLs. La liste vit dans src/i18n/config.ts, une seule source de verite.
   i18n: {
-    defaultLocale: "en",
-    locales: ["en", "fr"],
+    defaultLocale: "zh-cn",
+    locales: ["en", "zh-cn"],
     routing: { prefixDefaultLocale: false, redirectToDefaultLocale: false },
   },
 
