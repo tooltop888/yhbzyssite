@@ -1,0 +1,95 @@
+/* src/moteur/back-office-rail.css - le rail du back office ne montre que ce qui agit sur le site (generique) : les contenus, les medias, les menus, les redirections, les reglages et les utilisateurs.
+ *
+ * EmDash livre un rail complet, pense pour un site qui lui confie tout. Trois
+ * de ses ecrans n'ont aucun effet sur un site de la maison, et une entree qui
+ * ecrit dans le vide est un piege (on y cree un encart, rien ne change) :
+ *   - les encarts (widgets) : aucune langue en 0.38, aucune barre d'edition ;
+ *     leurs usages vivent dans les entrees "pied-de-page", "en-tete" et "site" ;
+ *   - les sections natives d'EmDash, des blocs copies dans un texte riche, sans
+ *     lien vivant (a ne pas confondre avec la collection des textes des pages,
+ *     qui reste) ;
+ *   - les taxonomies natives, les signatures (bylines), les commentaires et
+ *     l'import WordPress, que le site ne lit pas.
+ * Leurs pages restent joignables par leur adresse : rien n'est casse, elles
+ * disparaissent seulement du rail. Menus et Redirections restent, ce sont des
+ * ecrans du site.
+ *
+ * Un site qui lit une taxonomie (Reef : ses etiquettes) la rend au rail
+ * dans SA feuille, par une regle plus precise que celle-ci :
+ *   html [data-sidebar="menu-item"]:has(> a[href^="/_emdash/admin/taxonomies/tag"]) { display: list-item; }
+ * et pose --aloha-panneaux-lus: taxonomies pour garder le panneau de l'article.
+ */
+[data-sidebar="menu-item"]:has(
+    > a[href="/_emdash/admin/comments"],
+    > a[href="/_emdash/admin/widgets"],
+    > a[href="/_emdash/admin/sections"],
+    > a[href^="/_emdash/admin/taxonomies/"],
+    > a[href="/_emdash/admin/bylines"],
+    > a[href="/_emdash/admin/byline-schema"],
+    > a[href^="/_emdash/admin/import/"]
+  ) {
+  display: none;
+}
+
+/* Les ecrans simples : ce drapeau dit au script du back office
+ * (ECRANS_SIMPLES, habillage.ts) que ce site ne lit ni le slogan, ni l'URL,
+ * ni le format des dates des Parametres, ni le slug d'un bloc, ni les
+ * panneaux Responsabilite, Collaborateurs et Taxonomies : il les cache. */
+:root {
+  --aloha-ecrans-simples: 1;
+}
+
+/* Une photo non choisie : le champ le dit en toutes lettres. La page affiche
+ * alors la photo livree avec le theme ; le champ vide ne montrait qu'un cadre
+ * gris, et le client croyait n'avoir aucune photo (releve du testeur). */
+[id^="field-"]:has(> button > span > div > svg + span)::after {
+  font-size: 0.85rem;
+  color: var(--color-kumo-subtle, inherit);
+}
+html[lang^="fr"] [id^="field-"]:has(> button > span > div > svg + span)::after {
+  content: "Aucune photo choisie : le site affiche la photo livrée avec le thème. Choisissez-en une pour la remplacer.";
+}
+html:not([lang^="fr"]) [id^="field-"]:has(> button > span > div > svg + span)::after {
+  content: "No photo chosen: the site shows the photo delivered with the theme. Choose one to replace it.";
+}
+/* Deux champs image disent autre chose quand ils sont vides :
+ * le logo du mode sombre (vide : le logo clair reste affiche en mode sombre,
+ * identite() de cadre.ts) et l'image de partage d'une page (vide : celle du
+ * site). La phrase generique y etait fausse. */
+html[lang^="fr"] #field-logo_dark:has(> button > span > div > svg + span)::after {
+  content: "Aucun logo choisi : en mode sombre, le site garde le logo du mode clair. Choisissez-en un pour le remplacer.";
+}
+html:not([lang^="fr"]) #field-logo_dark:has(> button > span > div > svg + span)::after {
+  content: "No logo chosen: in dark mode the site keeps the light logo. Choose one to replace it.";
+}
+html[lang^="fr"] #field-meta_image:has(> button > span > div > svg + span)::after {
+  content: "Aucune image choisie : la page est partagée avec l'image de partage du site. Choisissez-en une pour cette page.";
+}
+html:not([lang^="fr"]) #field-meta_image:has(> button > span > div > svg + span)::after {
+  content: "No image chosen: the page is shared with the site's sharing image. Choose one for this page.";
+}
+
+/* Une liste de choix vide : EmDash 0.38 laisse le bouton sans
+ * aucun texte (couleur de la marque, police du site). Vide veut dire, dans
+ * chaque liste des sites de la maison, le reglage d'origine du theme : le
+ * bouton le dit. */
+[data-kumo-component="Select"][data-kumo-part="trigger"] > span[data-placeholder]:empty::before {
+  color: var(--color-kumo-subtle, inherit);
+}
+html[lang^="fr"] [data-kumo-component="Select"][data-kumo-part="trigger"] > span[data-placeholder]:empty::before {
+  content: "Réglage d'origine du thème";
+}
+html:not([lang^="fr"]) [data-kumo-component="Select"][data-kumo-part="trigger"] > span[data-placeholder]:empty::before {
+  content: "Theme default";
+}
+
+/* Le bandeau d'avertissement d'EmDash 0.38 (Courriels, Mettre le site a jour) :
+ * texte jaune sur fond jaune pale, 1,9:1 (mesure dans Chrome),
+ * illisible pour le client. Le texte passe au brun, 6:1 et plus ; le fond et
+ * l'icone gardent leur jaune. */
+.bg-kumo-banner-warning.text-kumo-warning {
+  color: #6b4a00;
+}
+[data-mode="dark"] .bg-kumo-banner-warning.text-kumo-warning {
+  color: #f3d77e;
+}
