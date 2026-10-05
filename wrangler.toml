@@ -1,4 +1,13 @@
 # wrangler.toml - le Worker de la demo figee de Reef (moteur eteint) : langue du visiteur, plans du site, page introuvable.
+# ...
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "reefoss"
+
+[[d1_databases]]
+binding = "DB"
+database_id = "b8b3f0d0-5854-4a4c-a795-58b159b40a26"
+# ...
 
 name = "yhbzyssite"
 main = "src/worker.ts"
