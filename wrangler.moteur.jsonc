@@ -6,7 +6,7 @@
   "compatibility_date": "2026-08-14",
   "compatibility_flags": ["nodejs_compat"],
   "d1_databases": [{ "binding": "DB", "database_name": "reef-moteur" }],
-  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "reef-moteur-media" }],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "reefoss" }],
   // Les pages introuvables figees (404.html, fr/404.html) sont des fichiers :
   // demandees par leur propre adresse, les assets les serviraient en 200 sans
   // reveiller le Worker. Cette liste les lui confie, et il repond 404 (voir
