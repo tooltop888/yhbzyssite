@@ -1,17 +1,16 @@
 // @ts-check
+import { defineConfig } from "astro/config";
+import cloudflare from '@astrojs/cloudflare';
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
-import cloudflare from '@astrojs/cloudflare';
+import { moteur, MOTEUR_ACTIF } from "./moteur.config.mjs";
+import { existsSync, readdirSync, readFileSync, renameSync, rmdirSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 export default defineConfig({
   output: 'server', // 从 "static" 改为 "server"
   adapter: cloudflare(),
 });
-import { moteur, MOTEUR_ACTIF } from "./moteur.config.mjs";
-import { existsSync, readdirSync, readFileSync, renameSync, rmdirSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-
 // Moteur allume, l'adapter range les pages figees sous dist/client/ ; sans ce
 // detour, le plan de site ne retrouvait plus leur head et perdait ses x-default.
 const DIST = fileURLToPath(new URL(MOTEUR_ACTIF ? "./dist/client/" : "./dist/", import.meta.url));
