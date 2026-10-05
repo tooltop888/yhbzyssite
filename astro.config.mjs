@@ -80,8 +80,8 @@ export default defineConfig({
   // sous /fr/. prefixDefaultLocale: false est ce qui evite un /en/ inutile dans
   // les URLs. La liste vit dans src/i18n/config.ts, une seule source de verite.
   i18n: {
-    defaultLocale: "zh-cn",
-    locales: ["en", "zh-cn"],
+    defaultLocale: 'zh-CN',
+    locales: ['zh-CN', 'zh-TW', 'en'],
     routing: { prefixDefaultLocale: false, redirectToDefaultLocale: false },
   },
 
