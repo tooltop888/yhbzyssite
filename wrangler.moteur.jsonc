@@ -22,7 +22,7 @@
   // utilise (src/moteur/extensions/courriels/). Sans elle, rien ne part.
   "send_email": [{ "name": "EMAIL" }],
   // Publication programmee et entretien : une minute de resolution.
-  "triggers": { "crons": ["* * * * *"] }
+  "triggers": { "crons": ["* * * * *"] },
   "r2_buckets": [
     {
       "binding": "BUCKET",
