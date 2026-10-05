@@ -5,7 +5,7 @@
   "main": "./src/worker.moteur.ts",
   "compatibility_date": "2026-08-14",
   "compatibility_flags": ["nodejs_compat"],
-  "d1_databases": [{ "binding": "DB", "database_name": "reef-moteur" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "reefdb" }],
   "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "reefoss" }],
   // Les pages introuvables figees (404.html, fr/404.html) sont des fichiers :
   // demandees par leur propre adresse, les assets les serviraient en 200 sans
