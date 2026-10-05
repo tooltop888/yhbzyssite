@@ -23,9 +23,6 @@
   "send_email": [{ "name": "EMAIL" }],
   // Publication programmee et entretien : une minute de resolution.
   "triggers": { "crons": ["* * * * *"] }
-}
-{
-  // ...
   "r2_buckets": [
     {
       "binding": "BUCKET",
@@ -38,5 +35,5 @@
       "database_id": "b8b3f0d0-5854-4a4c-a795-58b159b40a26"
     }
   ],
-  // ...
 }
+
